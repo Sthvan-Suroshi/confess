@@ -37,7 +37,7 @@ export default function UserDashboard() {
   const fetchAcceptMessages = useCallback(async () => {
     setIsSwitchLoading(true);
     try {
-      const response = await axios.post<ApiResponse>("/api/accept-message");
+      const response = await axios.get<ApiResponse>("/api/accept-message");
       setValue("acceptMessages", response.data.isAcceptingMessage);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;

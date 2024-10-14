@@ -172,7 +172,7 @@ export default function Page() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full mt-4 bg-blue-400 hover:bg-blue-500 text-white"
+              className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white"
             >
               {isSubmitting ? (
                 <>
