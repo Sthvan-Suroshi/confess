@@ -14,7 +14,7 @@ export default function RootLayout({
 
   return (
     <>
-      <nav>{session && <Navbar />}</nav>
+      {session && <Navbar />}
       <div>{children}</div>
     </>
   );

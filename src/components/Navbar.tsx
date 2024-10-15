@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="p-5 bg-blue-100 shadow-md"
+      className="p-5 bg-blue-100 shadow-md sticky top-0 z-50"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}

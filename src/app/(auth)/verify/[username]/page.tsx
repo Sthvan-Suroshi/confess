@@ -18,7 +18,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-export default function page() {
+export default function Page() {
   const router = useRouter();
   const { username } = useParams<{ username: string }>();
   const { toast } = useToast();
