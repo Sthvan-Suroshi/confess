@@ -52,8 +52,6 @@ export default function Page() {
       return;
     }
 
-    console.log(res);
-
     if (res?.ok) {
       router.push("/dashboard");
     }

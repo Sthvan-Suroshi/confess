@@ -107,7 +107,7 @@ export default function FullPageFancyMessageInput() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          Send us a message
+          Send me a confession
         </motion.h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <motion.div
@@ -203,7 +203,7 @@ export default function FullPageFancyMessageInput() {
           transition={{ delay: 0.8, duration: 0.5 }}
         >
           <Sparkles className="inline-block w-4 h-4 mr-1 text-yellow-500" />
-          We appreciate your feedback!
+          <span>Confessions are anonymous and private.</span>
         </motion.div>
 
         {/* New section for encouraging sign-ups */}
