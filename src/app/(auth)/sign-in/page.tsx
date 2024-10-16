@@ -43,18 +43,19 @@ export default function Page() {
       redirect: false,
     });
 
-
-
     if (res?.error) {
       toast({
         title: "Error",
         description: res.error,
         variant: "destructive",
       });
+      return;
     }
 
-    if (res?.url) {
-      router.replace("/dashboard");
+    console.log(res);
+
+    if (res?.ok) {
+      router.push("/dashboard");
     }
     setIsSubmitting(false);
   };
@@ -65,62 +66,65 @@ export default function Page() {
         <h2 className="text-2xl font-bold text-blue-500 mb-6 text-center">
           Sign In
         </h2>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              name="identifier"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-blue-500">
-                    Email/Username
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="email/username"
-                      {...field}
-                      className="border-blue-300 focus:border-blue-400 focus:ring-blue-400"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                name="identifier"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-blue-500">
+                      Email/Username
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="email/username"
+                        {...field}
+                        className="border-blue-300 focus:border-blue-400 focus:ring-blue-400"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              name="password"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-blue-500">Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="password"
-                      {...field}
-                      type="password"
-                      className="border-blue-300 focus:border-blue-400 focus:ring-blue-400"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                name="password"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-blue-500">Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="password"
+                        {...field}
+                        type="password"
+                        className="border-blue-300 focus:border-blue-400 focus:ring-blue-400"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-                </>
-              ) : (
-                "Sign In"
-              )}
-            </Button>
-          </form>
-        </Form>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+                    wait
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </Button>
+            </form>
+          </Form>
+        </div>
         <div className="text-center mt-4">
           <p className="text-gray-600">
             Not a member?{" "}

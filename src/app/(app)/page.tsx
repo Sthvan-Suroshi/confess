@@ -3,36 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Lock, Users, Zap } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function LandingPage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   return (
     <div className="h-screen w-full bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400 flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden relative">
-      <div
-        className="absolute w-32 h-32 rounded-full pointer-events-none mix-blend-soft-light"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%)",
-          left: mousePosition.x,
-          top: mousePosition.y,
-          transform: "translate(-50%, -50%)",
-        }}
-      />
       <motion.div
         className="max-w-4xl w-full flex flex-col items-center relative z-10"
         initial={{ opacity: 0, y: 50 }}
@@ -48,32 +23,35 @@ export default function LandingPage() {
             Share your secrets anonymously. Connect with others through honesty.
           </p>
         </div>
-
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl mb-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          {[
-            { icon: Lock, title: "Anonymous", text: "Share without fear" },
-            { icon: Users, title: "Community", text: "Connect with others" },
-            { icon: Zap, title: "Instant", text: "Real-time confessions" },
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              className="bg-white bg-opacity-10 p-3 rounded-lg flex flex-col items-center gap-1"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <item.icon className="h-6 w-6 text-blue-300 mb-1 mx-auto" />
-              <h3 className="text-md font-semibold text-white">{item.title}</h3>
-              <p className="text-blue-100 text-sm">{item.text}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div>
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            {[
+              { icon: Lock, title: "Anonymous", text: "Share without fear" },
+              { icon: Users, title: "Community", text: "Connect with others" },
+              { icon: Zap, title: "Instant", text: "Real-time confessions" },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="bg-white bg-opacity-10 p-3 rounded-lg flex flex-col items-center gap-1"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <item.icon className="h-6 w-6 text-blue-300 mb-1 mx-auto" />
+                <h3 className="text-md font-semibold text-white">
+                  {item.title}
+                </h3>
+                <p className="text-blue-100 text-sm">{item.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
         <motion.div
           className="flex space-x-4 mb-6"

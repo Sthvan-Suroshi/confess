@@ -1,21 +1,18 @@
 "use client";
 
-import React from "react";
-import "../../globals.css";
-import { useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
+import { useSession } from "next-auth/react";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
-  const { data: session } = useSession();
+}
 
+export default function RootLayout({ children }: RootLayoutProps) {
+  const session = useSession();
   return (
-    <>
+    <div className="bg-blue-50 pb-5 h-screen">
       {session && <Navbar />}
-      <div>{children}</div>
-    </>
+      {children}
+    </div>
   );
 }

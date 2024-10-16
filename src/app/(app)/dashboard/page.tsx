@@ -137,98 +137,100 @@ export default function UserDashboard() {
   };
 
   return (
-    <div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded-lg shadow-lg w-full max-w-6xl"
-      >
-        <h1 className="text-3xl font-bold  mb-6">User Dashboard</h1>
+    <>
+      <div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mt-8  mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded-lg shadow-lg w-full max-w-6xl"
+        >
+          <h1 className="text-3xl font-bold  mb-6">User Dashboard</h1>
 
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold text-blue-500 mb-2">
-            Copy Your Unique Link
-          </h2>
-          <div className="flex items-center gap-2">
-            <input
-              type="text"
-              value={profileUrl}
-              disabled
-              className="input input-bordered w-full p-2 border border-blue-300 rounded focus:ring-blue-400 focus:border-blue-400 bg-white"
-            />
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-blue-500 mb-2">
+              Copy Your Unique Link
+            </h2>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={profileUrl}
+                disabled
+                className="input input-bordered w-full p-2 border border-blue-300 rounded focus:ring-blue-400 focus:border-blue-400 bg-white"
+              />
+              <Button
+                onClick={copyToClipboard}
+                className={`bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300 ${
+                  copied ? "bg-green-500 hover:bg-green-600" : ""
+                }`}
+              >
+                {copied ? (
+                  <CheckCircle className="h-5 w-5" />
+                ) : (
+                  <Copy className="h-5 w-5" />
+                )}
+              </Button>
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <div className="flex items-center">
+              <Switch
+                {...register("acceptMessages")}
+                checked={acceptMessages}
+                onCheckedChange={handleSwitchChange}
+                disabled={isSwitchLoading}
+                className="data-[state=checked]:bg-blue-500"
+              />
+              <span className="ml-3 font-medium">
+                Accept Messages:{" "}
+                {acceptMessages ? (
+                  <span className="text-blue-500">On</span>
+                ) : (
+                  <span className="text-red-500">Off</span>
+                )}
+              </span>
+            </div>
+          </div>
+
+          <Separator className="my-4 bg-blue-200" />
+
+          <div>
             <Button
-              onClick={copyToClipboard}
-              className={`bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300 ${
-                copied ? "bg-green-500 hover:bg-green-600" : ""
-              }`}
+              className="bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300"
+              onClick={(e) => {
+                e.preventDefault();
+                fetchMessages(true);
+              }}
+              disabled={isLoading}
             >
-              {copied ? (
-                <CheckCircle className="h-5 w-5" />
+              {isLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                <Copy className="h-5 w-5" />
+                <RefreshCcw className="h-5 w-5" />
               )}
+              <span className="ml-2">Refresh Messages</span>
             </Button>
           </div>
-        </div>
 
-        <div className="mb-6">
-          <div className="flex items-center">
-            <Switch
-              {...register("acceptMessages")}
-              checked={acceptMessages}
-              onCheckedChange={handleSwitchChange}
-              disabled={isSwitchLoading}
-              className="data-[state=checked]:bg-blue-500"
-            />
-            <span className="ml-3 font-medium">
-              Accept Messages:{" "}
-              {acceptMessages ? (
-                <span className="text-blue-500">On</span>
-              ) : (
-                <span className="text-red-500">Off</span>
-              )}
-            </span>
-          </div>
-        </div>
-
-        <Separator className="my-4 bg-blue-200" />
-
-        <div>
-          <Button
-            className="bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300"
-            onClick={(e) => {
-              e.preventDefault();
-              fetchMessages(true);
-            }}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <Loader2 className="h-5 w-5 animate-spin" />
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {messages.length > 0 ? (
+              messages.map((message) => (
+                <MessageCard
+                  key={String(message._id)}
+                  message={message}
+                  onMessageDelete={handleDeleteMessage}
+                />
+              ))
             ) : (
-              <RefreshCcw className="h-5 w-5" />
+              <p className=" col-span-2 text-center">
+                Oops! No messages to display. Share your link to get confessions
+                from your friends.
+              </p>
             )}
-            <span className="ml-2">Refresh Messages</span>
-          </Button>
-        </div>
-
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {messages.length > 0 ? (
-            messages.map((message) => (
-              <MessageCard
-                key={String(message._id)}
-                message={message}
-                onMessageDelete={handleDeleteMessage}
-              />
-            ))
-          ) : (
-            <p className=" col-span-2 text-center">
-              Oops! No messages to display. Share your link to get confessions
-              from your friends.
-            </p>
-          )}
-        </div>
-      </motion.div>
-    </div>
+          </div>
+        </motion.div>
+      </div>
+    </>
   );
 }

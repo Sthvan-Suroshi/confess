@@ -33,6 +33,13 @@ export async function GET() {
       );
     }
 
+    if (user.length === 0) {
+      return Response.json(
+        { success: true, message: "No messages found for user" },
+        { status: 200 }
+      );
+    }
+
     return Response.json(
       { success: true, message: "User found", messages: user[0].messages },
       { status: 200 }
