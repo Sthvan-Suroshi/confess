@@ -72,7 +72,7 @@ export default function ErrorPage() {
             Oops! Something Went Wrong
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Don't worry, it's not you - it's us. We're working on fixing the
+            Don&apos;t worry, it&apos;s not you - it&apos;s us. We&apos;re working on fixing the
             issue.
           </p>
         </motion.div>

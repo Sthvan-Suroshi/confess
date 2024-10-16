@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     //decodeURIComponent this method removes the space and adds %20 in btwn the space
     const decodedUsername = decodeURIComponent(username);
 
-    const res = usernameQuerySchema.safeParse(username);
+    usernameQuerySchema.safeParse(username);
 
     const user = await UserModel.findOne({ username: decodedUsername });
     if (!user) {

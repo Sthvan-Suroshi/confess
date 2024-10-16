@@ -75,7 +75,7 @@ export default function NotFound() {
             Oops! Something Went Wrong!
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Don't worry, Try Again!
+            Don&apos;t worry, Try Again!
           </p>
         </motion.div>
 
